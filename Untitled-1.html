@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recomendación de Ejercicios</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #e0f7fa; 
+        }
+        h1 {
+            text-align: center; 
+        }
+        label {
+            font-weight: bold;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: hsl(212, 71%, 63%);
+            border: 1px solid #ddd;
+        }
+        .exercise-img {
+            width: 100px;
+            height: auto;
+            margin-right: 10px;
+            vertical-align: middle;
+        }
+        ul {
+            list-style: none;
+        }
+        #extraInfo {
+            display: none; /* Escondido por defecto */
+        }
+        /* Aquí es donde defines el tamaño del texto debajo de los videos */
+        .texto-grande {
+            font-size: 1.2em; /* Ajusta el tamaño según lo que necesites */
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>FITNESS</h1>
+    <h1>hecho por sofia</h1>
+
+    <form id="formulario">
+        <label for="edad">Edad:</label>
+        <input type="number" id="edad" name="edad" required min="0"><br><br>
+
+        <div id="extraInfo">
+            <label for="altura">Altura (en cm):</label>
+            <input type="number" id="altura" name="altura" required><br><br>
+
+            <label for="peso">Peso actual (en kg):</label>
+            <input type="number" id="peso" name="peso" required><br><br>
+
+            <label for="pesoDeseado">Peso deseado (en kg):</label>
+            <input type="number" id="pesoDeseado" name="pesoDeseado" required><br><br>
+        </div>
+
+        <button type="button" onclick="validarEdad()">Validar Edad</button>
+        <button type="button" onclick="calcularEjercicios()">Calcular Ejercicios</button>
+    </form>
+
+    <div id="resultado" class="result"></div>
+
+    <script>
+        // Función para validar la edad
+        function validarEdad() {
+            const edad = parseInt(document.getElementById('edad').value);
+            if (edad > 10) {
+                document.getElementById('extraInfo').style.display = 'block';
+            } else {
+                alert("Debes tener más de 10 años para continuar.");
+                document.getElementById('extraInfo').style.display = 'none';
+                document.getElementById('formulario').reset(); // Resetea el formulario
+            }
+        }
+
+        // Función para calcular ejercicios recomendados
+        function calcularEjercicios() {
+            const edad = parseInt(document.getElementById('edad').value);
+            if (edad <= 10) {
+                document.getElementById('resultado').innerHTML = "Debes ser mayor de 10 años para obtener recomendaciones de ejercicios.";
+                return;
+            }
+
+            const altura = parseFloat(document.getElementById('altura').value);
+            const peso = parseFloat(document.getElementById('peso').value);
+            const pesoDeseado = parseFloat(document.getElementById('pesoDeseado').value);
+
+            let resultado = '';
+
+            if (pesoDeseado < peso) {
+                resultado += "<h2>Ejercicios para bajar de peso:</h2>";
+                resultado += "<ul>";    
+                resultado += "<li><iframe width='560' height='315' src='https://www.youtube.com/embed/ZuQkqgrKcfM' title='YouTube video player' frameborder='0' allowfullscreen></iframe></li>";
+                resultado += "<li class='texto-grande'> Realizar estiramientos iniciando desde los pies hasta la cabeza de la siguiente manera </li> ";
+                resultado += "<li><iframe width='560' height='315' src='https://www.youtube.com/embed/Ciuubvxn9W4?start=161' title='YouTube video player' frameborder='0' allowfullscreen></iframe></li>";
+                resultado += "<li class='texto-grande'> Para quemar grasa es muy bueno realizar ejercicios que obliguen al cuerpo a usar la grasa acumulada como energía </li> ";
+                resultado += "<li><iframe width='560' height='315' src='https://www.youtube.com/embed/g1N_cJ-D1pU' title='YouTube video player' frameborder='0' allowfullscreen></iframe></li>";
+                resultado += "<li class='texto-grande'> Para quemar grasa es muy importante realizar ejercicios que obliguen a los músculos a crecer </li> ";
+                resultado += "</ul>";
+            } else if (pesoDeseado > peso) {
+                resultado += "<h2>Ejercicios para bajar de peso:</h2>";
+                resultado += "<ul>";    
+                resultado += "<li><iframe width='560' height='315' src='https://www.youtube.com/embed/3S3jw1tdNII' title='YouTube video player' frameborder='0' allowfullscreen></iframe></li>";
+                resultado += "<li class='texto-grande'> Realizar ejercicios de pesas los cuales se enfoquen en aumentar la masa muscular </li> ";
+                resultado += "<li><iframe width='560' height='315' src='https://www.youtube.com/embed/NeQ61BhNO60' title='YouTube video player' frameborder='0' allowfullscreen></iframe></li>";
+                resultado += "<li class='texto-grande'> realizar ejercicios de resistencia para aumaentar la fuerza, estimular el crecimiento de masa muscular </li> ";
+                resultado += "<li><iframe width='560' height='315' src='https://www.youtube.com/embed/-35SUofrmW4' title='YouTube video player' frameborder='0' allowfullscreen></iframe></li>";
+                resultado += "<li class='texto-grande'> Para quemar grasa es muy importante realizar ejercicios que obliguen a los músculos a crecer </li> ";
+                resultado += "</ul>";
+            } else {
+                resultado += "¡Ya estás en tu peso ideal!";
+            }
+
+            document.getElementById('resultado').innerHTML = resultado;
+        }
+    </script>
+
+</body>
+</html>
